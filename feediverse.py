@@ -37,6 +37,7 @@ def main():
     config = read_config(config_file)
 
     masto = Mastodon(
+        version_check_mode="none",
         api_base_url=config['url'],
         client_id=config['client_id'],
         client_secret=config['client_secret'],
@@ -76,7 +77,11 @@ def main():
             if args.dry_run:
                 print("trial run, not tooting ", entry["title"][:50])
                 continue
-            masto.status_post(feed['template'].format(**entry)[:499])
+            postbody = feed['template'].format(**entry)
+            if len(postbody) > 499:
+                postfix = "…\n\n(more…)"
+                postbody = postbody[:(499 - len(postfix))] + postfix
+            masto.status_post(postbody, visibility='public')
 
     if not args.dry_run:
         config['updated'] = newest_post.isoformat()
