@@ -59,6 +59,18 @@ def main():
             print("HTTP headers: {http_headers}")
         for entry in get_feed(feed['url'], config['updated'], http_headers):
             newest_post = max(newest_post, entry['updated'])
+
+            try:
+                feed['ignoretitle']
+            except:
+                ignoretitle = ''
+            else:
+                ignoretitle = feed['ignoretitle'].split(', ')
+                if args.verbose:
+                        print(f"ignoring {ignoretitle}")
+                if any(x in entry["title"] for x in ignoretitle):
+                    continue
+
             if args.verbose:
                 print(entry)
             if args.dry_run:
