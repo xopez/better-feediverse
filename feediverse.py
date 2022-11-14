@@ -106,9 +106,9 @@ def get_entry(entry):
     url = entry.id
     return {
         'url': url,
-        'link': entry.link,
+        'link': entry.get('link', ''),
         'title': cleanup(entry.title),
-        'author': author,
+        'author': cleanup(author),
         'summary': cleanup(summary),
         'content': content,
         'hashtags': ' '.join(hashtags),
