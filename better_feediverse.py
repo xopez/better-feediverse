@@ -26,6 +26,8 @@ def main():
     parser.add_argument("-c", "--config",
                         help="config file to use",
                         default=os.path.expanduser(DEFAULT_CONFIG_FILE))
+    parser.add_argument("-d", "--delay", action="store_true",
+                        help="delay randomly from 10 to 30 seconds between each post")
 
     args = parser.parse_args()
     config_file = args.config
