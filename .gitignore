@@ -1,5 +1,5 @@
 dist
-feediverse2.egg-info
+better_feediverse.egg-info
 Pipfile*
 __pycache__
 .config.yml.swp

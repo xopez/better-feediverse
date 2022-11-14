@@ -1,29 +1,29 @@
-*feediverse2* will read RSS/Atom feeds and send the messages as Mastodon posts.
+*better_feediverse* will read RSS/Atom feeds and send the messages as Mastodon posts.
 It's meant to add a little bit of spice to your timeline from other places.
 Please use it responsibly.
 
 ## Install
 
-    pip install feediverse2
+    pip install better_feediverse
 
 ## Run
 
-The first time you run *feediverse2* you'll need to tell it your Mastodon
+The first time you run *better_feediverse* you'll need to tell it your Mastodon
 instance and get an access token which it will save in a configuration file. If
-you don't specify a config file it will use `~/.feediverse2`:
+you don't specify a config file it will use `~/.better_feediverse`:
 
-    feediverse2
+    better_feediverse
 
-Once *feediverse2* is configured you can add it to your crontab:
+Once *better_feediverse* is configured you can add it to your crontab:
 
-    */15 * * * * /usr/local/bin/feediverse2    
+    */15 * * * * /usr/local/bin/better_feediverse    
 
-Run `feediverse2 --help` to show the command line options.
+Run `better_feediverse --help` to show the command line options.
 
 ## Post Format
 
 You can customize the post format by opening the configuration file (default is
-~/.feediverse2) and updating the *template* property of your feed. The default
+~/.better_feediverse) and updating the *template* property of your feed. The default
 format is:
 
     {title} {url}

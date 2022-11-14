@@ -12,7 +12,7 @@ from bs4 import BeautifulSoup
 from mastodon import Mastodon
 from datetime import datetime, timezone, MINYEAR
 
-DEFAULT_CONFIG_FILE = os.path.join("~", ".feediverse2")
+DEFAULT_CONFIG_FILE = os.path.join("~", ".better_feediverse")
 
 def main():
     parser = argparse.ArgumentParser()
@@ -167,18 +167,18 @@ def setup(config_file):
     url = input('What is your Mastodon Instance URL? ')
     have_app = yes_no('Do you have your app credentials already?')
     if have_app:
-        name = 'feediverse2'
+        name = 'better_feediverse'
         client_id = input('What is your app\'s client id: ')
         client_secret = input('What is your client secret: ')
         access_token = input('access_token: ')
     else:
         print("Ok, I'll need a few things in order to get your access token")
-        name = input('app name (e.g. feediverse2): ')
+        name = input('app name (e.g. better_feediverse): ')
         client_id, client_secret = Mastodon.create_app(
             api_base_url=url,
             client_name=name,
             #scopes=['read', 'write'],
-            website='https://github.com/xopez/feediverse2'
+            website='https://github.com/xopez/better_feediverse'
         )
         username = input('mastodon username (email): ')
         password = input('mastodon password (not stored): ')
@@ -201,9 +201,9 @@ def setup(config_file):
         config['updated'] = datetime.now(tz=timezone.utc).isoformat()
     save_config(config, config_file)
     print("")
-    print("Your feediverse2 configuration has been saved to {}".format(config_file))
+    print("Your better_feediverse configuration has been saved to {}".format(config_file))
     print("Add a line line this to your crontab to check every 15 minutes:")
-    print("*/15 * * * * /usr/local/bin/feediverse2")
+    print("*/15 * * * * /usr/local/bin/better_feediverse")
     print("")
 
 if __name__ == "__main__":
