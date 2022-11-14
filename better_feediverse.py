@@ -7,6 +7,8 @@ import yaml
 import argparse
 import dateutil
 import feedparser
+import random
+import time
 
 from bs4 import BeautifulSoup
 from mastodon import Mastodon
@@ -76,12 +78,16 @@ def main():
                 print(entry)
             if args.dry_run:
                 print("trial run, not tooting ", entry["title"][:50])
-                continue
-            postbody = feed['template'].format(**entry)
-            if len(postbody) > 499:
-                postfix = "…\n\n(more…)"
-                postbody = postbody[:(499 - len(postfix))] + postfix
-            masto.status_post(postbody, visibility='public')
+            if not args.dry_run:
+                postbody = feed['template'].format(**entry)
+                if len(postbody) > 499:
+                    postfix = "…\n\n(more…)"
+                    postbody = postbody[:(499 - len(postfix))] + postfix
+                masto.status_post(postbody, visibility='public')
+            if args.delay:
+                delay = random.randrange(10,30)
+                print("Delaying..." + str(delay) + " seconds...")
+                time.sleep(delay)
 
     if not args.dry_run:
         config['updated'] = newest_post.isoformat()
