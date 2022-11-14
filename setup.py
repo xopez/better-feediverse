@@ -5,10 +5,10 @@ with open("README.md") as f:
 
 setup(
     name='better_feediverse',
-    version='1.0.3',
+    version='2.0.1',
     python_requires='>=3.3',
     url='https://github.com/xopez/better_feediverse',
-    author=['Ed Summers','Xopez'],
+    author='Ed Summers, Xopez',
     author_email='28950736+xopez@users.noreply.github.com',
     py_modules=['better_feediverse'],
     description='Connect an RSS Feed to Mastodon',
