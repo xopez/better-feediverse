@@ -32,7 +32,7 @@ def main():
         print("using config file", config_file)
 
     if not os.path.isfile(config_file):
-        setup(config_file)        
+        setup(config_file)
 
     config = read_config(config_file)
 
@@ -44,10 +44,20 @@ def main():
     )
 
     newest_post = config['updated']
+
     for feed in config['feeds']:
+
+        try:
+            feed['custom_http_headers']
+        except:
+            http_headers = ''
+        else:
+            http_headers = 'request_headers={' + config['custom_http_headers'] + '}'
+
         if args.verbose:
             print(f"fetching {feed['url']} entries since {config['updated']}")
-        for entry in get_feed(feed['url'], config['updated']):
+            print("HTTP headers: {http_headers}")
+        for entry in get_feed(feed['url'], config['updated'], http_headers):
             newest_post = max(newest_post, entry['updated'])
             if args.verbose:
                 print(entry)
@@ -60,8 +70,8 @@ def main():
         config['updated'] = newest_post.isoformat()
         save_config(config, config_file)
 
-def get_feed(feed_url, last_update):
-    feed = feedparser.parse(feed_url)
+def get_feed(feed_url, last_update, http_headers):
+    feed = feedparser.parse(feed_url, http_headers)
     if last_update:
         entries = [e for e in feed.entries
                    if dateutil.parser.parse(e['updated']) > last_update]
@@ -146,7 +156,7 @@ def setup(config_file):
         access_token = input('access_token: ')
     else:
         print("Ok, I'll need a few things in order to get your access token")
-        name = input('app name (e.g. feediverse): ') 
+        name = input('app name (e.g. feediverse): ')
         client_id, client_secret = Mastodon.create_app(
             api_base_url=url,
             client_name=name,
