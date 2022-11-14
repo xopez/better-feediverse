@@ -51,7 +51,7 @@ Since *feeds* is a list you can add additional feeds to watch if you want.
       - url: https://example.org/feed/
         template: "dot org: {title} {url}"
 
-## Custom Headers
+## Custom Headers *(optional)*
 
 if you want to include own headers you can place `custom_http_headers` in your config:
 
@@ -60,3 +60,14 @@ if you want to include own headers you can place `custom_http_headers` in your c
       - url: https://example.com/feed/
         template: "dot com: {title} {url}"
         custom_http_headers: 'header1: value1, header2: value2'
+
+
+## Filter *(optional)*
+
+if you want to exclude some titles you can place ignoretitle in your config:
+
+    ....
+    feeds:
+      - url: https://example.com/feed/
+        template: "dot com: {title} {url}"
+        ignoretitle: 'value1, value2'
