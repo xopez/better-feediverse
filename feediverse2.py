@@ -201,7 +201,7 @@ def setup(config_file):
         config['updated'] = datetime.now(tz=timezone.utc).isoformat()
     save_config(config, config_file)
     print("")
-    print("Your feediverse configuration has been saved to {}".format(config_file))
+    print("Your feediverse2 configuration has been saved to {}".format(config_file))
     print("Add a line line this to your crontab to check every 15 minutes:")
     print("*/15 * * * * /usr/local/bin/feediverse2")
     print("")
