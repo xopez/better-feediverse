@@ -58,10 +58,12 @@ def main():
             http_headers = ''
         else:
             http_headers = 'request_headers={' + config['custom_http_headers'] + '}'
+            if args.verbose:
+                print(f"HTTP headers: {config['custom_http_headers']}")
 
         if args.verbose:
             print(f"fetching {feed['url']} entries since {config['updated']}")
-            print(f"HTTP headers: {http_headers}")
+
         for entry in get_feed(feed['url'], config['updated'], http_headers):
             newest_post = max(newest_post, entry['updated'])
 
