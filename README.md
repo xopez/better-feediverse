@@ -1,3 +1,9 @@
+This repo is a copy and updated version of [edsu/feediverse](https://github.com/edsu/feediverse)
+
+You can always view changes here: https://github.com/edsu/feediverse/compare/master...xopez:better_feediverse:master
+
+## Description
+
 *better_feediverse* will read RSS/Atom feeds and send the messages as Mastodon posts.
 It's meant to add a little bit of spice to your timeline from other places.
 Please use it responsibly.
