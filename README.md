@@ -44,45 +44,4 @@ separated list of hashtags. For some feeds (e.g. youtube-rss) you should use `{l
 
 `{content}` is the whole content of the feed entry (with html-tags
 stripped). Please be aware that this might easily exceed Mastodon's
-limit of 512 characters.
-
-## Multiple Feeds
-
-Since *feeds* is a list you can add additional feeds to watch if you want.
-
-    ...
-    feeds:
-      - url: https://example.com/feed/
-        template: "dot com: {title} {url}"
-      - url: https://example.org/feed/
-        template: "dot org: {title} {url}"
-
-## Custom Headers *(optional)*
-
-If you want to include own headers you can place `custom_http_headers` in your config:
-
-    ....
-    feeds:
-      - url: https://example.com/feed/
-        template: "dot com: {title} {url}"
-        custom_http_headers: 'header1: value1, header2: value2'
-
-
-## Filter *(optional)*
-
-If you want to exclude some titles you can place ignoretitle in your config:
-
-    ....
-    feeds:
-      - url: https://example.com/feed/
-        template: "dot com: {title} {url}"
-        ignoretitle: 'value1, value2'
-
-## Accessing multiple entry links in the template *(experimental)*
-
-If you want to exclude some titles you can place ignoretitle in your config:
-
-    ....
-    feeds:
-      - url: https://example.com/feed/
-        template: "dot com: {title} {links[0].href} {links[1].href}"
+default limit of 500 characters.
