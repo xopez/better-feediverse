@@ -122,6 +122,7 @@ def get_entry(entry):
     return {
         'url': url,
         'link': entry.get('link', ''),
+        'links': entry.get('links', ''),
         'title': cleanup(entry.title),
         'author': cleanup(author),
         'summary': cleanup(summary),

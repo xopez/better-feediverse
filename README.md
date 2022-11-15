@@ -1,3 +1,9 @@
+This repo is a copy and updated version of [edsu/feediverse](https://github.com/edsu/feediverse)
+
+You can always view changes here: https://github.com/edsu/feediverse/compare/master...xopez:better_feediverse:master
+
+## Description
+
 *better_feediverse* will read RSS/Atom feeds and send the messages as Mastodon posts.
 It's meant to add a little bit of spice to your timeline from other places.
 Please use it responsibly.
@@ -53,7 +59,7 @@ Since *feeds* is a list you can add additional feeds to watch if you want.
 
 ## Custom Headers *(optional)*
 
-if you want to include own headers you can place `custom_http_headers` in your config:
+If you want to include own headers you can place `custom_http_headers` in your config:
 
     ....
     feeds:
@@ -64,10 +70,19 @@ if you want to include own headers you can place `custom_http_headers` in your c
 
 ## Filter *(optional)*
 
-if you want to exclude some titles you can place ignoretitle in your config:
+If you want to exclude some titles you can place ignoretitle in your config:
 
     ....
     feeds:
       - url: https://example.com/feed/
         template: "dot com: {title} {url}"
         ignoretitle: 'value1, value2'
+
+## Accessing multiple entry links in the template *(experimental)*
+
+If you want to exclude some titles you can place ignoretitle in your config:
+
+    ....
+    feeds:
+      - url: https://example.com/feed/
+        template: "dot com: {title} {links[0].href} {links[1].href}"
