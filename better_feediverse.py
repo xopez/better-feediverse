@@ -144,6 +144,7 @@ def get_entry(entry):
         "content": content,
         "hashtags": " ".join(hashtags),
         "updated": dateutil.parser.parse(entry["updated"]),
+        "updateddate": dateutil.parser.parse(entry["updated"]).strftime('%Y%m%d'),
     }
 
 
