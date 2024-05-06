@@ -13,6 +13,7 @@ import time
 from bs4 import BeautifulSoup
 from mastodon import Mastodon
 from datetime import datetime, timezone, MINYEAR
+from tzlocal import get_localzone
 
 DEFAULT_CONFIG_FILE = os.path.join("~", ".better_feediverse")
 
@@ -99,6 +100,9 @@ def main():
                 if len(postbody) > 499:
                     postfix = "…\n\n(more…)"
                     postbody = postbody[: (499 - len(postfix))] + postfix
+#                masto.status_post(postbody, visibility="direct")
+#                masto.status_post(postbody, visibility="private")
+#                masto.status_post(postbody, visibility="unlisted")
                 masto.status_post(postbody, visibility="public")
             if args.delay:
                 delay = random.randrange(10, 30)
@@ -134,6 +138,9 @@ def get_entry(entry):
     if content:
         content = cleanup(content[0].get("value", ""))
     url = entry.id
+    updatedZ = dateutil.parser.parse(entry["updated"])
+    updatedLT= updatedZ.astimezone(get_localzone())
+
     return {
         "url": url,
         "link": entry.get("link", ""),
@@ -143,7 +150,12 @@ def get_entry(entry):
         "summary": cleanup(summary),
         "content": content,
         "hashtags": " ".join(hashtags),
-        "updated": dateutil.parser.parse(entry["updated"]),
+        "updated": updatedZ,
+        "updateddateZ": updatedZ.strftime('%Y%m%d'),
+        "updateddateLT": updatedLT.strftime('%Y%m%d'),
+        "updateddatetimeZ": updatedZ.strftime('%Y%m%d%H%M%S'),
+        "updateddatetimeLT": updatedLT.strftime('%Y%m%d%H%M%S'),
+        "updateddatetimeLTDE": updatedLT.strftime('%d.%m.%Y %H:%M')
     }
 
 
